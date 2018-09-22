@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -127,6 +128,11 @@ class LeePalabras implements Callable<Map<String, Cantidad>> {
 public class WordCountSinHadoop {
     
     public static void main(String[] args) throws Exception{
+        if (args.length == 0) {
+            args = new String[1];
+            args[0] = "D:\\Maestria\\Cloud Computing\\Briggi\\WordCountSinHadoop\\build\\classes\\Test002.txt";
+        }
+            
         if (args.length > 0) {
             
             if ("--generar".equals(args[0])) {
@@ -135,8 +141,8 @@ public class WordCountSinHadoop {
             } else {
             
                 File file = new File(args[0]);
-                int nChunks = 48;
-                int tamanhoBuffer = 1024 * 1024;
+                int nChunks = 16;
+                int tamanhoBuffer = 1024*1024 * 10;
 
                 // Creamos lectores dependiendo de cada pedazo del archivo gigante
                 List<LeePalabras> lectores = IntStream
@@ -159,7 +165,7 @@ public class WordCountSinHadoop {
                 // Esperamos que los hilos terminen su trabajo
                 service.shutdown();
 
-                Map<String, Cantidad> total = new HashMap<>();
+                Map<String, Cantidad> total = new TreeMap<>();
 
                 resultados.forEach(palabras -> {
                     try {
