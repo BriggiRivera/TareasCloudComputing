@@ -9,4 +9,4 @@ Para generar archivo grande:
 Para ejecutar conteo:
 1. Situarse en la carpeta build por medio de la consola.
 2. Ejecutar el siguiente comando:
-   java wordcountsinhadoop.WordCountSinHadoop <archivo_a_procesar> > <archivo_salida>
+   java wordcountsinhadoop.WordCountSinHadoop <archivo_a_procesar> > <archivo_resultado>
